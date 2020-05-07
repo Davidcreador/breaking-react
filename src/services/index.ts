@@ -14,8 +14,9 @@ export default {
     return result.data
   },
 
-  async fetchCharacters() {
-    const result = await axios.get(`${API_URL}/characters`);
+  async fetchCharacters(offset: number = 0) {
+    const limit: number = 6;
+    const result = await axios.get(`${API_URL}/characters?limit=${limit}&offset=${offset}`);
 
     if (!result) {
       console.log("Error while fetching data");
