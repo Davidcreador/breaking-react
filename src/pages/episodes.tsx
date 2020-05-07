@@ -2,25 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Card, FilterButton } from "../components"
 import Service from "../services";
 import { EpisodeType } from "../types";
+import { useFilter } from "../hooks"
 
 const NUMBER_SEASONS = ["1", "2", "3", "4", "5"];
 const SHOW_LIMIT = 6;
 
-// Custom Hook to be able to reuse the filter logic and re-renders
-const useFilter = (opt: number) => {
-  const [state, setState] = useState(opt);
 
-  useEffect(() => {
-    setState(opt);
-  }, [opt]);
-
-  return state
-}
 
 export default function Episodes() {
   const [data, setData] = useState<[]>([]);
   const [visible, setVisible] = useState<number>(6);
-  const [filterOption, setFilterOption] = useState<number>(1);
+  const [filterOption, setFilterOption] = useState<number | string>(1);
   const filter = useFilter(filterOption);
 
   useEffect(() => {

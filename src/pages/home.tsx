@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Service from "../services";
 import { CharacterCard, DeathCard, FilterButton } from "../components"
+import { CharacterType } from '../types';
+import { useFilter } from "../hooks"
 
 export default function Home() {
   const [data, setData] = useState<[]>([]);
   const [deaths, setDeaths] = useState<[]>([]);
   const [isFetching, setIsFetching] = useState(false);
-  const [filterOption, setFilterOption] = useState<number | string>("Name");
+  const [filterOption, setFilterOption] = useState<number | string>("name");
+  const filter = useFilter(filterOption);
 
   // Handles scrolling event
   useEffect(() => {
@@ -46,23 +49,34 @@ export default function Home() {
   }
 
   const handleDropdownChange = (opt: number | string) => {
-    setFilterOption(Number(opt));
+    setFilterOption(String(opt).toLowerCase());
   }
 
   const loadMore = () => {
     setIsFetching(false);
   }
 
+  const renderCharacters = () => {
+    // Here should be CharacterType and need to debug it more
+    const sorted = data.sort((a: any, b: any) => {
+      if (a[filter] < b[filter]) return -1;
+      if (a[filter] > b[filter]) return 1;
+      return 0;
+    });
+
+    return sorted && sorted.map((character, index) => (
+      <CharacterCard character={character} key={index} />
+    ))
+  }
+
   return (
     <>
       <div className="mb-16">
         <h2 className="text-3xl my-10">Breaking Bad Characters</h2>
-        <FilterButton filterBy="Sort by" options={["Name", "Birthday", "Portrayer"] as any} currentFilter={filterOption} handleChange={handleDropdownChange} />
+        <FilterButton filterBy="Sort by" options={["Name", "Birthday", "Portrayed"] as any} currentFilter={filterOption} handleChange={handleDropdownChange} />
         <div className="flex flex-row">
           <div className="flex flex-wrap w-1/2 bg-gray-200">
-            {data && data.map((character, index) => (
-              <CharacterCard character={character} key={index} />
-            ))}
+            {renderCharacters()}
             {isFetching && 'Fetching more list items...'}
           </div>
           <div className="flex flex-wrap w-1/2 bg-gray-200">
