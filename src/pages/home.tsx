@@ -85,7 +85,7 @@ export default function Home() {
                 <h3 className="text-2xl">Total Deaths: {deaths.length}</h3>
                 <h2 className="text-3xl">Deaths</h2>
               </div>
-              <div className="flex flex-wrap">
+              <div className="grid grid-cols-2 gap-2">
                 {deaths && deaths.slice(0, 5).map((death, index) => (
                   <DeathCard death={death} key={index} />
                 ))}
