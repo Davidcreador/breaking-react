@@ -2,11 +2,8 @@
 
 ## Requirements Not Implemented
 
-- Not implemented a load more on the Home Page, only in the Episodes Page
-- Not implemented a infinite scroll loading more
 - Not implemented a good error handling
 - Not implemented boundaries for react component errors
-- Not implemented a sorting layout based on multiple options
 
 ## Bugs
 
@@ -19,7 +16,6 @@
 - Implement better error handling
 - Implement responsive layout
 - Implement Caching layer to avoid multiple http request
-- Implement infinite scroll loading
 
 ## How to run the project
 
