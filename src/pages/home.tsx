@@ -74,20 +74,22 @@ export default function Home() {
       <div className="mb-16">
         <h2 className="text-3xl my-10">Breaking Bad Characters</h2>
         <FilterButton filterBy="Sort by" options={["Name", "Birthday", "Portrayed"] as any} currentFilter={filterOption} handleChange={handleDropdownChange} />
-        <div className="flex flex-row">
-          <div className="flex flex-wrap w-1/2 bg-gray-200">
-            {renderCharacters()}
-            {isFetching && 'Fetching more list items...'}
-          </div>
-          <div className="flex flex-wrap w-1/2 bg-gray-200">
-            <div className="flex flex-col">
-              <h3 className="text-2xl">Total Deaths: {deaths.length}</h3>
-              <h2 className="text-3xl">Deaths</h2>
+        <div className="flex items-start">
+          <div className="flex flex-wrap w-1/1 items-start">
+            <div className="grid grid-cols-3 gap-4 w-1/2">
+              {renderCharacters()}
+              {isFetching && 'Fetching more list items...'}
             </div>
-            <div className="flex flex-wrap">
-              {deaths && deaths.slice(0, 5).map((death, index) => (
-                <DeathCard death={death} key={index} />
-              ))}
+            <div className="flex flex-wrap w-1/2 px-10">
+              <div className="flex flex-col">
+                <h3 className="text-2xl">Total Deaths: {deaths.length}</h3>
+                <h2 className="text-3xl">Deaths</h2>
+              </div>
+              <div className="flex flex-wrap">
+                {deaths && deaths.slice(0, 5).map((death, index) => (
+                  <DeathCard death={death} key={index} />
+                ))}
+              </div>
             </div>
           </div>
         </div>

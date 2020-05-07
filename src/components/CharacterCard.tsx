@@ -3,7 +3,7 @@ import { CharacterType } from "../types";
 
 const CharacterCard = ({ character }: { character: CharacterType }): JSX.Element => {
   return (
-    <div className="w-1/2 bg-white shadow-lg rounded-lg overflow-hidden my-4">
+    <div className="w-full bg-white shadow-lg rounded-lg overflow-hidden my-4">
       <img className="w-full h-56 object-cover object-center" src={character.img} alt="avatar" />
       <div className="flex items-center px-3 py-3 bg-gray-900">
         <h2 className="mx-3 text-white font-semibold text-lg">Occupation: {character.occupation}</h2>
